@@ -1,0 +1,77 @@
+#include <cppunit/extensions/HelperMacros.h>
+#include <cppunit/extensions/TestFactoryRegistry.h>
+
+#include <JXMPP/Parser/MessageParser.h>
+#include <JXMPP/Parser/PayloadParserFactoryCollection.h>
+#include <JXMPP/Parser/UnitTest/StanzaParserTester.h>
+
+using namespace JXMPP;
+
+class MessageParserTest : public CppUnit::TestFixture {
+        CPPUNIT_TEST_SUITE(MessageParserTest);
+        CPPUNIT_TEST(testParse_Normal);
+        CPPUNIT_TEST(testParse_Chat);
+        CPPUNIT_TEST(testParse_Error);
+        CPPUNIT_TEST(testParse_Groupchat);
+        CPPUNIT_TEST(testParse_Headline);
+        CPPUNIT_TEST_SUITE_END();
+
+    public:
+        void setUp() {
+            factoryCollection_ = new PayloadParserFactoryCollection();
+        }
+
+        void tearDown() {
+            delete factoryCollection_;
+        }
+
+        void testParse_Chat() {
+            MessageParser testling(factoryCollection_);
+            StanzaParserTester parser(&testling);
+
+            CPPUNIT_ASSERT(parser.parse("<message type=\"chat\"/>"));
+
+            CPPUNIT_ASSERT_EQUAL(Message::Chat, testling.getStanzaGeneric()->getType());
+        }
+
+        void testParse_Groupchat() {
+            MessageParser testling(factoryCollection_);
+            StanzaParserTester parser(&testling);
+
+            CPPUNIT_ASSERT(parser.parse("<message type=\"groupchat\"/>"));
+
+            CPPUNIT_ASSERT_EQUAL(Message::Groupchat, testling.getStanzaGeneric()->getType());
+        }
+
+        void testParse_Error() {
+            MessageParser testling(factoryCollection_);
+            StanzaParserTester parser(&testling);
+
+            CPPUNIT_ASSERT(parser.parse("<message type=\"error\"/>"));
+
+            CPPUNIT_ASSERT_EQUAL(Message::Error, testling.getStanzaGeneric()->getType());
+        }
+
+        void testParse_Headline() {
+            MessageParser testling(factoryCollection_);
+            StanzaParserTester parser(&testling);
+
+            CPPUNIT_ASSERT(parser.parse("<message type=\"headline\"/>"));
+
+            CPPUNIT_ASSERT_EQUAL(Message::Headline, testling.getStanzaGeneric()->getType());
+        }
+
+        void testParse_Normal() {
+            MessageParser testling(factoryCollection_);
+            StanzaParserTester parser(&testling);
+
+            CPPUNIT_ASSERT(parser.parse("<message/>"));
+
+            CPPUNIT_ASSERT_EQUAL(Message::Normal, testling.getStanzaGeneric()->getType());
+        }
+
+        private:
+            PayloadParserFactoryCollection* factoryCollection_;
+};
+
+CPPUNIT_TEST_SUITE_REGISTRATION(MessageParserTest);

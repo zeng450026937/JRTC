@@ -1,0 +1,74 @@
+#ifndef JXMPP_XMPPLAYER_H
+#define JXMPP_XMPPLAYER_H
+
+#include <memory>
+
+#include <boost/noncopyable.hpp>
+#include <boost/signals2.hpp>
+
+#include <JXMPP/Base/API.h>
+#include <JXMPP/Base/SafeByteArray.h>
+#include <JXMPP/Elements/StreamType.h>
+#include <JXMPP/Elements/ToplevelElement.h>
+#include <JXMPP/Parser/XMPPParserClient.h>
+#include <JXMPP/StreamStack/HighLayer.h>
+
+namespace JXMPP {
+    class ProtocolHeader;
+    class XMPPParser;
+    class PayloadParserFactoryCollection;
+    class XMPPSerializer;
+    class PayloadSerializerCollection;
+    class XMLParserFactory;
+    class BOSHSessionStream;
+
+    class JXMPP_API XMPPLayer : public XMPPParserClient, public HighLayer, boost::noncopyable {
+        friend class BOSHSessionStream;
+        public:
+            XMPPLayer(
+                    PayloadParserFactoryCollection* payloadParserFactories,
+                    PayloadSerializerCollection* payloadSerializers,
+                    XMLParserFactory* xmlParserFactory,
+                    StreamType streamType,
+                    bool setExplictNSonTopLevelElements = false);
+            virtual ~XMPPLayer();
+
+            void writeHeader(const ProtocolHeader& header);
+            void writeFooter();
+            void writeElement(std::shared_ptr<ToplevelElement>);
+            void writeData(const std::string& data);
+
+            void resetParser();
+
+        protected:
+            void handleDataRead(const SafeByteArray& data);
+            void writeDataInternal(const SafeByteArray& data);
+
+        public:
+            boost::signals2::signal<void (const ProtocolHeader&)> onStreamStart;
+            boost::signals2::signal<void ()> onStreamEnd;
+            boost::signals2::signal<void (std::shared_ptr<ToplevelElement>)> onElement;
+            boost::signals2::signal<void (const SafeByteArray&)> onWriteData;
+            boost::signals2::signal<void (const SafeByteArray&)> onDataRead;
+            boost::signals2::signal<void ()> onError;
+
+        private:
+            void handleStreamStart(const ProtocolHeader&);
+            void handleElement(std::shared_ptr<ToplevelElement>);
+            void handleStreamEnd();
+
+            void doResetParser();
+
+        private:
+            PayloadParserFactoryCollection* payloadParserFactories_;
+            XMPPParser* xmppParser_;
+            PayloadSerializerCollection* payloadSerializers_;
+            XMLParserFactory* xmlParserFactory_;
+            XMPPSerializer* xmppSerializer_;
+            bool setExplictNSonTopLevelElements_;
+            bool resetParserAfterParse_;
+            bool inParser_;
+    };
+}
+
+#endif // JXMPP_XMPPLAYER_H

@@ -1,0 +1,7 @@
+#ifndef JXMPP_VERSION_H
+#define JXMPP_VERSION_H
+
+#define JXMPP_VERSION 0x010000
+#define JXMPP_VERSION_STRING "1.0"
+
+#endif // JXMPP_VERSION_H
