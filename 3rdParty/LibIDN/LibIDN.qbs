@@ -30,16 +30,14 @@ Product {
                 if (cpp.compilerVersionMajor == 15) {
                     return outer.concat(["stubs/win32/VC2008"])
                 }
-
+                
                 return outer
             }
         }
     }
 
     Export {
-        Depends {
-            name: "cpp"
-        }
+        Depends { name: "cpp" }
         cpp.defines: ["HAVE_" + product.name.toUpperCase()]
         cpp.includePaths: product.cpp.includePaths
     }

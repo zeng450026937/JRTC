@@ -65,6 +65,7 @@ Product {
 
     cpp.defines: ["JXMPP_EXPORT", "NEED_IDN","_WIN32_WINNT=0x0501"]
     cpp.includePaths: ["../"]
+
     Properties {
         condition: product.type == "staticlibrary"
         cpp.defines: outer.concat(["JXMPP_STATIC"])

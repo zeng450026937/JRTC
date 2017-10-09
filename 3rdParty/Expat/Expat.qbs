@@ -37,9 +37,7 @@ Product {
     }
 
     Export {
-        Depends {
-            name: "cpp"
-        }
+        Depends { name: "cpp" }
         cpp.defines: ["HAVE_" + product.name.toUpperCase()]
         cpp.includePaths: [qbs.installRoot + "/" + product.name]
     }
