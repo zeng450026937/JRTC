@@ -15,10 +15,16 @@
 #include <ldns/rdata.h>
 #include <ldns/rr.h>
 #include <ldns/util.h>
+#ifdef _MSC_VER
+#include <string.h>
+#else
 #include <strings.h>
+#endif
 #include <stdlib.h>
 #include <stdio.h>
+#ifndef _MSC_VER
 #include <sys/time.h>
+#endif
 #include <time.h>
 
 #ifdef HAVE_SSL

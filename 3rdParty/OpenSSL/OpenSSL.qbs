@@ -1154,7 +1154,10 @@ Product {
     Export {
         Depends { name: "cpp" }
         cpp.defines: ["HAVE_" + product.name.toUpperCase()]
-        cpp.includePaths: [qbs.installRoot]
+        cpp.includePaths: [
+            qbs.installRoot,
+            qbs.installRoot + "/" + product.name
+        ]
     }
 
     Group {

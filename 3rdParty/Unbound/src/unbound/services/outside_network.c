@@ -44,7 +44,13 @@
 #ifdef HAVE_SYS_TYPES_H
 #  include <sys/types.h>
 #endif
-#include <sys/time.h>
+#ifdef _MSC_VER
+#ifdef HAVE_TIME_H
+#  include <time.h>
+#endif
+#else
+#  include <sys/time.h>
+#endif
 #include <ldns/wire2host.h>
 #include "services/outside_network.h"
 #include "services/listen_dnsport.h"

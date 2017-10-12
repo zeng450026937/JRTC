@@ -40,7 +40,13 @@
  * queries it has outstanding to authoritative servers.
  */
 #include "config.h"
-#include <sys/time.h>
+#ifdef _MSC_VER
+#ifdef HAVE_TIME_H
+#  include <time.h>
+#endif
+#else
+#  include <sys/time.h>
+#endif
 #include "services/outbound_list.h"
 #include "services/outside_network.h"
 

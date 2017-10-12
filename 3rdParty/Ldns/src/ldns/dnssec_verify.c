@@ -2,7 +2,11 @@
 
 #include <ldns/ldns.h>
 
+#ifdef _MSC_VER
+#include <string.h>
+#else
 #include <strings.h>
+#endif
 #include <time.h>
 
 #ifdef HAVE_SSL
@@ -18,7 +22,7 @@
 ldns_dnssec_data_chain *
 ldns_dnssec_data_chain_new()
 {
-	ldns_dnssec_data_chain *nc = LDNS_CALLOC(ldns_dnssec_data_chain, 1);
+	ldns_dnssec_data_chain *nc = LDNS_XMALLOC(ldns_dnssec_data_chain, 1);
         if(!nc) return NULL;
 	/* 
 	 * not needed anymore because CALLOC initalizes everything to zero.

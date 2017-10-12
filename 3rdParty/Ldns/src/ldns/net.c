@@ -27,7 +27,11 @@
 #ifdef HAVE_ARPA_INET_H
 #include <arpa/inet.h>
 #endif
+#ifdef _MSC_VER
+#include <time.h>
+#else
 #include <sys/time.h>
+#endif
 #include <errno.h>
 #include <fcntl.h>
 
@@ -275,7 +279,7 @@ ldns_sock_wait(int sockfd, struct timeval timeout, int write)
 #ifndef S_SPLINT_S
 	fd_set fds;
 	FD_ZERO(&fds);
-	FD_SET(FD_SET_T sockfd, &fds);
+	FD_SET(sockfd, &fds);
 	if(write)
 		ret = select(sockfd+1, NULL, &fds, NULL, &timeout);
 	else

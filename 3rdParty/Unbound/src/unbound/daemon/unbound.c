@@ -44,7 +44,13 @@
 #ifdef HAVE_GETOPT_H
 #include <getopt.h>
 #endif
-#include <sys/time.h>
+#ifdef _MSC_VER
+#ifdef HAVE_TIME_H
+#  include <time.h>
+#endif
+#else
+#  include <sys/time.h>
+#endif
 #include "util/log.h"
 #include "daemon/daemon.h"
 #include "daemon/remote.h"

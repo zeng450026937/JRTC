@@ -9,7 +9,11 @@
  */
 
 #include <ctype.h>
+#ifdef _MSC_VER
 #include <string.h>
+#else
+#include <strings.h>
+#endif
 #include <strings.h>
 #ifdef HAVE_GLOB_H
 # include <glob.h>

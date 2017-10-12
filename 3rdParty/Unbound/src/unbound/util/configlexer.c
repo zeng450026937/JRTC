@@ -19,7 +19,11 @@
 
 /* begin standard C headers. */
 #include <stdio.h>
+#ifdef _MSC_VER
 #include <string.h>
+#else
+#include <strings.h>
+#endif
 #include <errno.h>
 #include <stdlib.h>
 
@@ -1777,8 +1781,11 @@ char *yytext;
  */
 
 #include <ctype.h>
+#ifdef _MSC_VER
 #include <string.h>
+#else
 #include <strings.h>
+#endif
 #ifdef HAVE_GLOB_H
 # include <glob.h>
 #endif
@@ -1927,6 +1934,7 @@ static void config_end_include(void)
 #define include_quoted 4
 #define val 5
 
+#define YY_NO_UNISTD_H
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
  * down here because we want the user's section 1 to have been scanned first.

@@ -329,7 +329,7 @@ ldns_dnssec_name_new()
 {
 	ldns_dnssec_name *new_name;
 
-	new_name = LDNS_CALLOC(ldns_dnssec_name, 1);
+	new_name = LDNS_XMALLOC(ldns_dnssec_name, 1);
 	if (!new_name) {
 		return NULL;
 	}

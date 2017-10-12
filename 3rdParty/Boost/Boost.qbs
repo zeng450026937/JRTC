@@ -11,6 +11,7 @@ Product {
     cpp.includePaths: ["src"]
 
     Properties {
+        // 0x0600 = _WIN32_WINNT_VISTA
         condition: qbs.targetOS.contains("windows")
         cpp.defines: outer.concat(["_WIN32_WINNT=0x0600"])
     }
@@ -20,16 +21,7 @@ Product {
     }
     Properties {
         condition: qbs.targetOS.contains("posix")
-        cpp.dynamicLibraries: {
-            if (product.type === "dynamiclibrary")
-                outer.concat(["rt"])
-            return outer
-        }
-        cpp.staticLibraries: {
-            if (product.type === "staticlibrary")
-                outer.concat(["rt"])
-            return outer
-        }
+        cpp.staticLibraries: outer.concat(["rt"])
     }
 
     Group {

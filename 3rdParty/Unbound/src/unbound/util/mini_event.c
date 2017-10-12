@@ -41,10 +41,13 @@
  */
 
 #include "config.h"
+#ifdef _MSC_VER
 #ifdef HAVE_TIME_H
-#include <time.h>
+#  include <time.h>
 #endif
-#include <sys/time.h>
+#else
+#  include <sys/time.h>
+#endif
 
 #if defined(USE_MINI_EVENT) && !defined(USE_WINSOCK)
 #include <signal.h>

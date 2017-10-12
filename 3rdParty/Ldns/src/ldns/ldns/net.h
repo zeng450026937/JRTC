@@ -14,13 +14,17 @@
 #define LDNS_NET_H
 
 #include <ldns/ldns.h>
-
-
-#ifdef __cplusplus
-extern "C" {
+#ifdef _MSC_VER
+#include <winsock2.h>
+#define socklen_t int
+#define in_port_t USHORT
+#define in_addr_t UINT
+#else
+#include <sys/socket.h>
+#include <netdb.h>
 #endif
 
-#define LDNS_DEFAULT_TIMEOUT_SEC 5
+#define LDNS_DEFAULT_TIMEOUT_SEC 2
 #define LDNS_DEFAULT_TIMEOUT_USEC 0
 
 /**
@@ -47,7 +51,7 @@ ldns_status ldns_udp_send(uint8_t **result, ldns_buffer *qbin, const struct sock
  * \param[in] qbin the ldns_buffer to be send
  * \param[in] to the ip addr to send to
  * \param[in] tolen length of the ip addr
- * \param[in] timeout *unused*, was the timeout value for the network
+ * \param[in] timeout the timeout value for the network
  * \return the socket used
  */
 
@@ -59,7 +63,7 @@ int ldns_udp_bgsend(ldns_buffer *qbin, const struct sockaddr_storage *to, sockle
  * \param[in] qbin the ldns_buffer to be send
  * \param[in] to the ip addr to send to
  * \param[in] tolen length of the ip addr
- * \param[in] timeout the timeout value for the connect attempt
+ * \param[in] timeout the timeout value for the network
  * \return the socket used
  */
 int ldns_tcp_bgsend(ldns_buffer *qbin, const struct sockaddr_storage *to, socklen_t tolen, struct timeval timeout);
@@ -104,7 +108,7 @@ ldns_status ldns_send_buffer(ldns_pkt **pkt, ldns_resolver *r, ldns_buffer *qb, 
  * Create a tcp socket to the specified address
  * \param[in] to ip and family
  * \param[in] tolen length of to
- * \param[in] timeout timeout for the connect attempt
+ * \param[in] timeout timeout for the socket
  * \return a socket descriptor
  */
 int ldns_tcp_connect(const struct sockaddr_storage *to, socklen_t tolen, struct timeval timeout);
@@ -112,7 +116,7 @@ int ldns_tcp_connect(const struct sockaddr_storage *to, socklen_t tolen, struct 
 /**
  * Create a udp socket to the specified address
  * \param[in] to ip and family
- * \param[in] timeout *unused*, was timeout for the socket
+ * \param[in] timeout timeout for the socket
  * \return a socket descriptor
  */
 int ldns_udp_connect(const struct sockaddr_storage *to, struct timeval timeout);
@@ -138,20 +142,7 @@ ssize_t ldns_tcp_send_query(ldns_buffer *qbin, int sockfd, const struct sockaddr
  * \return number of bytes sent
  */
 ssize_t ldns_udp_send_query(ldns_buffer *qbin, int sockfd, const struct sockaddr_storage *to, socklen_t tolen);
-
 /**
- * Gives back a raw packet from the wire and reads the header data from the given
- * socket. Allocates the data (of size size) itself, so don't forget to free
- *
- * \param[in] sockfd the socket to read from
- * \param[out] size the number of bytes that are read
- * \param[in] timeout the time allowed between packets.
- * \return the data read
- */
-uint8_t *ldns_tcp_read_wire_timeout(int sockfd, size_t *size, struct timeval timeout);
-
-/**
- * This routine may block. Use ldns_tcp_read_wire_timeout, it checks timeouts.
  * Gives back a raw packet from the wire and reads the header data from the given
  * socket. Allocates the data (of size size) itself, so don't forget to free
  *
@@ -200,9 +191,5 @@ ldns_rdf * ldns_sockaddr_storage2rdf(struct sockaddr_storage *sock, uint16_t *po
  * \return ldns_status the status of the transfer
  */
 ldns_status ldns_axfr_start(ldns_resolver *resolver, ldns_rdf *domain, ldns_rr_class c);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif  /* LDNS_NET_H */

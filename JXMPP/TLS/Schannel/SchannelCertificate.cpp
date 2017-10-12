@@ -5,8 +5,9 @@
  */
 
 
-#include "Swiften/TLS/Schannel/SchannelCertificate.h"
-#include "Swiften/Base/ByteArray.h"
+#include <JXMPP/TLS/Schannel/SchannelCertificate.h>
+#include <JXMPP/Base/ByteArray.h>
+#include <JXMPP/Base/String.h>
 
 #define SECURITY_WIN32
 #include <Windows.h>
@@ -14,6 +15,8 @@
 #include <security.h>
 #include <schnlsp.h>
 #include <Wincrypt.h>
+
+#include <tchar.h>
 
 using std::vector;
 
@@ -102,9 +105,14 @@ void SchannelCertificate::parse()
     DWORD requiredSize = CertNameToStr(X509_ASN_ENCODING, &m_cert->pCertInfo->Subject, CERT_OID_NAME_STR, NULL, 0);
     if (requiredSize > 1)
     {
-        vector<char> rawSubjectName(requiredSize);
+        vector<TCHAR> rawSubjectName(requiredSize);
         CertNameToStr(X509_ASN_ENCODING, &m_cert->pCertInfo->Subject, CERT_OID_NAME_STR, &rawSubjectName[0], rawSubjectName.size());
+
+        #ifdef UNICODE
+        m_subjectName = convertWStringToString(std::wstring(&rawSubjectName[0]));
+        #else
         m_subjectName = std::string(&rawSubjectName[0]);
+        #endif
     }
 
     //
@@ -114,9 +122,14 @@ void SchannelCertificate::parse()
     requiredSize = CertGetNameString(m_cert, CERT_NAME_ATTR_TYPE, 0, szOID_COMMON_NAME, NULL, 0);
     if (requiredSize > 1)
     {
-        vector<char> rawCommonName(requiredSize);
+        vector<TCHAR> rawCommonName(requiredSize);
         requiredSize = CertGetNameString(m_cert, CERT_NAME_ATTR_TYPE, 0, szOID_COMMON_NAME, &rawCommonName[0], rawCommonName.size());
+
+        #ifdef UNICODE
+        m_commonNames.push_back( convertWStringToString( std::wstring(&rawCommonName[0]) ) );
+        #else
         m_commonNames.push_back( std::string(&rawCommonName[0]) );
+        #endif
     }
 
     //

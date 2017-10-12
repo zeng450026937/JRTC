@@ -6,10 +6,13 @@
 
 
 #include <JXMPP/TLS/Schannel/SchannelContext.h>
+#include <JXMPP/Base/String.h>
 
 #include <boost/bind.hpp>
 
 #include <WinHTTP.h> /* For SECURITY_FLAG_IGNORE_CERT_CN_INVALID */
+
+#include <tchar.h>
 
 #include <JXMPP/TLS/CAPICertificate.h>
 #include <JXMPP/TLS/Schannel/SchannelCertificate.h>
@@ -54,7 +57,11 @@ void SchannelContext::connect() {
     // certificate. Otherwise, just create a NULL credential.
     if (!certName_.empty()) {
         if (myCertStore_ == NULL) {
+            #ifdef UNICODE
+            myCertStore_ = CertOpenSystemStore(0, convertStringToWString(certStoreName_).c_str());
+            #elif
             myCertStore_ = CertOpenSystemStore(0, certStoreName_.c_str());
+            #endif
             if (!myCertStore_) {
                 indicateError(std::make_shared<TLSError>(TLSError::UnknownError));
                 return;

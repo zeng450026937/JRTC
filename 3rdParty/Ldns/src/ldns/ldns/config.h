@@ -1,112 +1,79 @@
-/* ldns/config.h.  Generated from config.h.in by configure.  */
 /* ldns/config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Define if building universal (internal helper macro) */
-/* #undef AC_APPLE_UNIVERSAL_BUILD */
+#undef AC_APPLE_UNIVERSAL_BUILD
 
 /* Define to 1 if you have the <arpa/inet.h> header file. */
-/* #undef HAVE_ARPA_INET_H */
+#undef HAVE_ARPA_INET_H
 
 /* Whether the C compiler accepts the "format" attribute */
-#define HAVE_ATTR_FORMAT 1
+#undef HAVE_ATTR_FORMAT
 
 /* Whether the C compiler accepts the "unused" attribute */
-#define HAVE_ATTR_UNUSED 1
+#undef HAVE_ATTR_UNUSED
 
 /* Define to 1 if you have the `b32_ntop' function. */
-/* #undef HAVE_B32_NTOP */
+#undef HAVE_B32_NTOP
 
 /* Define to 1 if you have the `b32_pton' function. */
-/* #undef HAVE_B32_PTON */
+#undef HAVE_B32_PTON
 
 /* Define to 1 if you have the `b64_ntop' function. */
-/* #undef HAVE_B64_NTOP */
+#undef HAVE_B64_NTOP
 
 /* Define to 1 if you have the `b64_pton' function. */
-/* #undef HAVE_B64_PTON */
-
-/* Define to 1 if you have the `bzero' function. */
-/* #undef HAVE_BZERO */
-
-/* Define to 1 if you have the `calloc' function. */
-#define HAVE_CALLOC 1
+#undef HAVE_B64_PTON
 
 /* Define to 1 if you have the `ctime_r' function. */
-/* #undef HAVE_CTIME_R */
-
-/* Is a CAFILE given at configure time */
-#define HAVE_DANE_CA_FILE 0
-
-/* Is a CAPATH given at configure time */
-#define HAVE_DANE_CA_PATH 0
-
-/* Define to 1 if you have the declaration of `NID_secp384r1', and to 0 if you
-   don't. */
-#define HAVE_DECL_NID_SECP384R1 1
-
-/* Define to 1 if you have the declaration of `NID_X9_62_prime256v1', and to 0
-   if you don't. */
-#define HAVE_DECL_NID_X9_62_PRIME256V1 1
+#undef HAVE_CTIME_R
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
-/* #undef HAVE_DLFCN_H */
+#undef HAVE_DLFCN_H
 
 /* Define to 1 if you have the `endprotoent' function. */
-/* #undef HAVE_ENDPROTOENT */
+#undef HAVE_ENDPROTOENT
 
 /* Define to 1 if you have the `endservent' function. */
-/* #undef HAVE_ENDSERVENT */
+#undef HAVE_ENDSERVENT
 
 /* Define to 1 if you have the `EVP_sha256' function. */
-#define HAVE_EVP_SHA256 1
-
-/* Define to 1 if you have the `fcntl' function. */
-/* #undef HAVE_FCNTL */
-
-/* Define to 1 if you have the `fork' function. */
-/* #undef HAVE_FORK */
+#undef HAVE_EVP_SHA256
 
 /* Whether getaddrinfo is available */
-#define HAVE_GETADDRINFO 1
+#undef HAVE_GETADDRINFO
 
 /* Define to 1 if you have the <getopt.h> header file. */
-#define HAVE_GETOPT_H 1
+#undef HAVE_GETOPT_H
 
 /* Define to 1 if you have the `gmtime_r' function. */
-/* #undef HAVE_GMTIME_R */
+#undef HAVE_GMTIME_R
 
 /* If you have HMAC_CTX_init */
-#define HAVE_HMAC_CTX_INIT 1
+#undef HAVE_HMAC_CTX_INIT
 
 /* Define to 1 if you have the `inet_aton' function. */
-/* #undef HAVE_INET_ATON */
+#undef HAVE_INET_ATON
 
 /* Define to 1 if you have the `inet_ntop' function. */
-/* #undef HAVE_INET_NTOP */
+#undef HAVE_INET_NTOP
 
 /* Define to 1 if you have the `inet_pton' function. */
-/* #undef HAVE_INET_PTON */
-
-/* Define to 1 if the system has the type `intptr_t'. */
-#define HAVE_INTPTR_T 1
+#undef HAVE_INET_PTON
 
 /* define if you have inttypes.h */
-#define HAVE_INTTYPES_H 1
-
-/* if the function 'ioctlsocket' is available */
-#define HAVE_IOCTLSOCKET 1
-
-/* Define to 1 if you have the `isascii' function. */
-#define HAVE_ISASCII 1
+#undef HAVE_INTTYPES_H
 
 /* Define to 1 if you have the `isblank' function. */
-#define HAVE_ISBLANK 1
+#undef HAVE_ISBLANK
 
-/* Define to 1 if you have the `pcap' library (-lpcap). */
-/* #undef HAVE_LIBPCAP */
+/* Define to 1 if you have the `crypto' library (-lcrypto). */
+#undef HAVE_LIBCRYPTO
 
-/* Define to 1 if you have the `localtime_r' function. */
-/* #undef HAVE_LOCALTIME_R */
+/* Define to 1 if you have the `nsl' library (-lnsl). */
+#undef HAVE_LIBNSL
+
+/* Define to 1 if you have the `socket' library (-lsocket). */
+#undef HAVE_LIBSOCKET
 
 /* Define to 1 if your system has a GNU libc compatible `malloc' function, and
    to 0 otherwise. */
@@ -116,223 +83,148 @@
 #define HAVE_MEMMOVE 1
 
 /* Define to 1 if you have the <memory.h> header file. */
-#define HAVE_MEMORY_H 1
-
-/* Define to 1 if you have the `memset' function. */
-#define HAVE_MEMSET 1
+#undef HAVE_MEMORY_H
 
 /* Define to 1 if you have the <netdb.h> header file. */
-/* #undef HAVE_NETDB_H */
-
-/* Define to 1 if you have the <netinet/if_ether.h> header file. */
-/* #undef HAVE_NETINET_IF_ETHER_H */
-
-/* Define to 1 if you have the <netinet/igmp.h> header file. */
-/* #undef HAVE_NETINET_IGMP_H */
+#undef HAVE_NETDB_H
 
 /* Define to 1 if you have the <netinet/in.h> header file. */
-/* #undef HAVE_NETINET_IN_H */
-
-/* Define to 1 if you have the <netinet/in_systm.h> header file. */
-/* #undef HAVE_NETINET_IN_SYSTM_H */
-
-/* Define to 1 if you have the <netinet/ip6.h> header file. */
-/* #undef HAVE_NETINET_IP6_H */
-
-/* Define to 1 if you have the <netinet/ip_compat.h> header file. */
-/* #undef HAVE_NETINET_IP_COMPAT_H */
-
-/* Define to 1 if you have the <netinet/ip.h> header file. */
-/* #undef HAVE_NETINET_IP_H */
-
-/* Define to 1 if you have the <netinet/udp.h> header file. */
-/* #undef HAVE_NETINET_UDP_H */
-
-/* Define to 1 if you have the <net/ethernet.h> header file. */
-/* #undef HAVE_NET_ETHERNET_H */
-
-/* Define to 1 if you have the <net/if.h> header file. */
-/* #undef HAVE_NET_IF_H */
+#undef HAVE_NETINET_IN_H
 
 /* Define to 1 if you have the <openssl/err.h> header file. */
-#define HAVE_OPENSSL_ERR_H 1
+#undef HAVE_OPENSSL_ERR_H
 
 /* Define to 1 if you have the <openssl/rand.h> header file. */
-#define HAVE_OPENSSL_RAND_H 1
+#undef HAVE_OPENSSL_RAND_H
 
 /* Define to 1 if you have the <openssl/ssl.h> header file. */
-#define HAVE_OPENSSL_SSL_H 1
-
-/* Define to 1 if you have the <pcap.h> header file. */
-/* #undef HAVE_PCAP_H */
-
-/* If available, contains the Python version number currently in use. */
-/* #undef HAVE_PYTHON */
+#undef HAVE_OPENSSL_SSL_H
 
 /* Define to 1 if you have the `random' function. */
-/* #undef HAVE_RANDOM */
+#define HAVE_RANDOM 1
 
 /* Define to 1 if your system has a GNU libc compatible `realloc' function,
    and to 0 otherwise. */
 #define HAVE_REALLOC 1
 
 /* Define to 1 if you have the `sleep' function. */
-#define HAVE_SLEEP 1
+#undef HAVE_SLEEP
 
 /* Define to 1 if you have the `snprintf' function. */
 #define HAVE_SNPRINTF 1
 
 /* Define if you have the SSL libraries installed. */
-#define HAVE_SSL /**/
+#define HAVE_SSL 1
 
 /* Define to 1 if you have the <stdarg.h> header file. */
-#define HAVE_STDARG_H 1
+#undef HAVE_STDARG_H
 
-/* Define to 1 if stdbool.h conforms to C99. */
-#define HAVE_STDBOOL_H 1
+/* Define to 1 if you have the <stdbool.h> header file. */
+#undef HAVE_STDBOOL_H
 
 /* Define to 1 if you have the <stdint.h> header file. */
-#define HAVE_STDINT_H 1
+#undef HAVE_STDINT_H
 
 /* Define to 1 if you have the <stdlib.h> header file. */
-#define HAVE_STDLIB_H 1
+#undef HAVE_STDLIB_H
 
 /* Define to 1 if you have the <strings.h> header file. */
-#define HAVE_STRINGS_H 1
+#undef HAVE_STRINGS_H
 
 /* Define to 1 if you have the <string.h> header file. */
-#define HAVE_STRING_H 1
+#undef HAVE_STRING_H
 
 /* Define to 1 if you have the `strlcpy' function. */
-/* #undef HAVE_STRLCPY */
-
-/* Define to 1 if you have the `strtoul' function. */
-#define HAVE_STRTOUL 1
-
-/* Define if you have SWIG libraries and header files. */
-/* #undef HAVE_SWIG */
+#undef HAVE_STRLCPY
 
 /* Define to 1 if you have the <sys/mount.h> header file. */
-/* #undef HAVE_SYS_MOUNT_H */
+#undef HAVE_SYS_MOUNT_H
 
 /* Define to 1 if you have the <sys/param.h> header file. */
-/* #undef HAVE_SYS_PARAM_H */
+#undef HAVE_SYS_PARAM_H
 
 /* define if you have sys/socket.h */
-/* #undef HAVE_SYS_SOCKET_H */
+#undef HAVE_SYS_SOCKET_H
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
-/* #undef HAVE_SYS_STAT_H */
+#undef HAVE_SYS_STAT_H
 
-/* define if you have sys/types.h */
-/* #undef HAVE_SYS_TYPES_H */
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
 
 /* Define to 1 if you have the `timegm' function. */
-/* #undef HAVE_TIMEGM */
+#undef HAVE_TIMEGM
 
 /* Define to 1 if you have the <time.h> header file. */
-#define HAVE_TIME_H 1
+#undef HAVE_TIME_H
 
-/* define if you have unistd.h */
-/* #undef HAVE_UNISTD_H */
-
-/* Define to 1 if you have the `vfork' function. */
-/* #undef HAVE_VFORK */
-
-/* Define to 1 if you have the <vfork.h> header file. */
-/* #undef HAVE_VFORK_H */
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
 
 /* Define to 1 if you have the <winsock2.h> header file. */
 #define HAVE_WINSOCK2_H 1
 
-/* Define to 1 if `fork' works. */
-/* #undef HAVE_WORKING_FORK */
-
-/* Define to 1 if `vfork' works. */
-/* #undef HAVE_WORKING_VFORK */
-
 /* Define to 1 if you have the <ws2tcpip.h> header file. */
-#define HAVE_WS2TCPIP_H 1
-
-/* Define to 1 if the system has the type `_Bool'. */
-#define HAVE__BOOL 1
-
-/* Is a CAFILE given at configure time */
-/* #undef LDNS_DANE_CA_FILE */
-
-/* Is a CAPATH given at configure time */
-/* #undef LDNS_DANE_CA_PATH */
-
-/* Default trust anchor file */
-#define LDNS_TRUST_ANCHOR_FILE "/mingw64/etc/unbound/root.key"
+#undef HAVE_WS2TCPIP_H
 
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
-#define LT_OBJDIR ".libs/"
+#undef LT_OBJDIR
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "libdns@nlnetlabs.nl"
+#undef PACKAGE_BUGREPORT
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "ldns"
+#undef PACKAGE_NAME
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "ldns 1.6.16"
+#undef PACKAGE_STRING
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "libdns"
-
-/* Define to the home page for this package. */
-#define PACKAGE_URL ""
+#undef PACKAGE_TARNAME
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.6.16"
-
-/* The size of `time_t', as computed by sizeof. */
-#define SIZEOF_TIME_T 8
+#undef PACKAGE_VERSION
 
 /* Define to 1 if you have the ANSI C header files. */
-#define STDC_HEADERS 1
+#undef STDC_HEADERS
 
 /* System configuration dir */
-#define SYSCONFDIR sysconfdir
-
-/* Define this to enable ECDSA support. */
-#define USE_ECDSA 1
+#undef SYSCONFDIR
 
 /* Define this to enable GOST support. */
-#define USE_GOST 1
+#undef USE_GOST
 
 /* Define this to enable SHA256 and SHA512 support. */
-#define USE_SHA2 1
+#undef USE_SHA2
 
 /* Enable extensions on AIX 3, Interix.  */
 #ifndef _ALL_SOURCE
-# define _ALL_SOURCE 1
+# undef _ALL_SOURCE
 #endif
 /* Enable GNU extensions on systems that have them.  */
 #ifndef _GNU_SOURCE
-# define _GNU_SOURCE 1
+# undef _GNU_SOURCE
 #endif
 /* Enable threading extensions on Solaris.  */
 #ifndef _POSIX_PTHREAD_SEMANTICS
-# define _POSIX_PTHREAD_SEMANTICS 1
+# undef _POSIX_PTHREAD_SEMANTICS
 #endif
 /* Enable extensions on HP NonStop.  */
 #ifndef _TANDEM_SOURCE
-# define _TANDEM_SOURCE 1
+# undef _TANDEM_SOURCE
 #endif
 /* Enable general extensions on Solaris.  */
 #ifndef __EXTENSIONS__
-# define __EXTENSIONS__ 1
+# undef __EXTENSIONS__
 #endif
 
 
 /* Whether the windows socket API is used */
-#define USE_WINSOCK 1
+#define USE_WINSOCK
 
 /* the version of the windows API enabled */
-#define WINVER 0x0502
+//#undef WINVER
 
 /* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
    significant byte first (like Motorola and SPARC, unlike Intel). */
@@ -342,97 +234,78 @@
 # endif
 #else
 # ifndef WORDS_BIGENDIAN
-/* #  undef WORDS_BIGENDIAN */
+#  undef WORDS_BIGENDIAN
 # endif
 #endif
 
 /* Define to 1 if on MINIX. */
-/* #undef _MINIX */
+#undef _MINIX
 
 /* Define to 2 if the system does not provide POSIX.1 features except with
    this defined. */
-/* #undef _POSIX_1_SOURCE */
+#undef _POSIX_1_SOURCE
 
 /* Define to 1 if you need to in order for `stat' and other things to work. */
-/* #undef _POSIX_SOURCE */
+#undef _POSIX_SOURCE
 
 /* Define to empty if `const' does not conform to ANSI C. */
-/* #undef const */
+#undef const
 
 /* in_addr_t */
-#define in_addr_t uint32_t
+#undef in_addr_t
 
 /* in_port_t */
-#define in_port_t uint16_t
+#undef in_port_t
 
 /* Define to `__inline__' or `__inline' if that's what the C compiler
    calls it, or to nothing if 'inline' is not supported under any name.  */
 #ifndef __cplusplus
-/* #undef inline */
+#define inline
 #endif
 
+#if _MSC_VER >= 1900
+#include <stdint.h>
+#else
 /* Define to `short' if <sys/types.h> does not define. */
-/* #undef int16_t */
-#define uint16_t short
+#undef int16_t
 
 /* Define to `int' if <sys/types.h> does not define. */
-/* #undef int32_t */
-#define int32_t int
+#undef int32_t
 
 /* Define to `long long' if <sys/types.h> does not define. */
-/* #undef int64_t */
-#define int64_t long long
+#undef int64_t
 
 /* Define to `char' if <sys/types.h> does not define. */
-/* #undef int8_t */
-#define int8_t char
-
-/* Define to the type of a signed integer type wide enough to hold a pointer,
-   if such a type exists, and if the system does not define it. */
-/* #undef intptr_t */
+#undef int8_t
 
 /* Define to rpl_malloc if the replacement function should be used. */
-/* #undef malloc */
-
-/* Define to `int' if <sys/types.h> does not define. */
-/* #undef pid_t */
-#define pid_t int
+#undef malloc
 
 /* Define to rpl_realloc if the replacement function should be used. */
-/* #undef realloc */
-
-/* Define to `unsigned int' if <sys/types.h> does not define. */
-/* #undef size_t */
-#define size_t unsigned int
+#undef realloc
 
 /* Define to 'int' if not defined */
-/* #undef socklen_t */
-
-/* Fallback member name for socket family in struct sockaddr_storage */
-/* #undef ss_family */
-
-/* Define to `int' if <sys/types.h> does not define. */
-/* #undef ssize_t */
-#define ssize_t int
+#undef socklen_t
 
 /* Define to `unsigned short' if <sys/types.h> does not define. */
-/* #undef uint16_t */
 #define uint16_t unsigned short
 
+#define int16_t short
+
 /* Define to `unsigned int' if <sys/types.h> does not define. */
-/* #undef uint32_t */
 #define uint32_t unsigned int
 
 /* Define to `unsigned long long' if <sys/types.h> does not define. */
-/* #undef uint64_t */
 #define uint64_t unsigned long long
 
 /* Define to `unsigned char' if <sys/types.h> does not define. */
-/* #undef uint8_t */
 #define uint8_t unsigned char
 
-/* Define as `fork' if `vfork' does not work. */
-#define vfork fork
+#define int8_t char
+
+#endif
+/* Define to `int' if <sys/types.h> does not define. */
+#define ssize_t int
 
 
 #include <stdio.h>
@@ -485,19 +358,26 @@
 #include <ws2tcpip.h>
 #endif
 
-
-/* detect if we need to cast to unsigned int for FD_SET to avoid warnings */
-#ifdef HAVE_WINSOCK2_H
-#define FD_SET_T (u_int)
+#ifdef _MSC_VER
+#if _MSC_VER < 1900
+#define snprintf _snprintf
 #else
-#define FD_SET_T 
+#ifndef HAVE_ISBLANK
+#define HAVE_ISBLANK
 #endif
-
-
-
-
-#ifdef __cplusplus
-extern "C" {
+#endif
+#define vsnprintf _vsnprintf
+#define strcasecmp _stricmp
+#define strncasecmp _strnicmp
+#define strdup _strdup
+/*
+#define gmtime gmtime_s
+#define ctime ctime_s
+#define strcpy strcpu_s
+*/
+#define putenv _putenv
+#define srandom srand
+#define random rand
 #endif
 
 #ifndef B64_PTON
@@ -507,7 +387,7 @@ int ldns_b64_ntop(uint8_t const *src, size_t srclength,
  * calculates the size needed to store the result of b64_ntop
  */
 /*@unused@*/
-static inline size_t ldns_b64_ntop_calculate_size(size_t srcsize)
+inline static size_t ldns_b64_ntop_calculate_size(size_t srcsize)
 {
 	return ((((srcsize + 2) / 3) * 4) + 1);
 }
@@ -518,9 +398,9 @@ int ldns_b64_pton(char const *src, uint8_t *target, size_t targsize);
  * calculates the size needed to store the result of ldns_b64_pton
  */
 /*@unused@*/
-static inline size_t ldns_b64_pton_calculate_size(size_t srcsize)
+inline static size_t ldns_b64_pton_calculate_size(size_t srcsize)
 {
-	return (((((srcsize + 3) / 4) * 3)) + 1);
+	return ((((srcsize / 4) * 3) - 2) + 2);
 }
 #endif /* !B64_NTOP */
 
@@ -541,15 +421,9 @@ time_t timegm (struct tm *tm);
 #ifndef HAVE_GMTIME_R
 struct tm *gmtime_r(const time_t *timep, struct tm *result);
 #endif
-#ifndef HAVE_LOCALTIME_R
-struct tm *localtime_r(const time_t *timep, struct tm *result);
-#endif
 #ifndef HAVE_ISBLANK
 int isblank(int c);
 #endif /* !HAVE_ISBLANK */
-#ifndef HAVE_ISASCII
-int isascii(int c);
-#endif /* !HAVE_ISASCII */
 #ifndef HAVE_SNPRINTF
 #include <stdarg.h>
 int snprintf (char *str, size_t count, const char *fmt, ...);
@@ -570,13 +444,7 @@ void *memmove(void *dest, const void *src, size_t n);
 #ifndef HAVE_STRLCPY
 size_t strlcpy(char *dst, const char *src, size_t siz);
 #endif
-#ifdef __cplusplus
-}
-#endif
 #ifndef HAVE_GETADDRINFO
 #include "compat/fake-rfc2553.h"
-#endif
-#ifndef HAVE_STRTOUL
-#define strtoul (unsigned long)strtol
 #endif
 

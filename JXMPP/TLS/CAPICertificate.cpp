@@ -1,7 +1,10 @@
 #include <JXMPP/TLS/CAPICertificate.h>
+#include <JXMPP/Base/String.h>
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/bind.hpp>
+
+#include <tchar.h>
 
 #include <JXMPP/Base/Log.h>
 #include <JXMPP/Network/TimerFactory.h>
@@ -130,7 +133,11 @@ void CAPICertificate::setUri (const std::string& capiUri) {
     }
 
     if (certStoreHandle_ == NULL) {
+        #ifdef UNICODE
+        certStoreHandle_ = CertOpenSystemStore(0, convertStringToWString(newCertStoreName).c_str());
+        #elif
         certStoreHandle_ = CertOpenSystemStore(0, newCertStoreName.c_str());
+        #endif
         if (!certStoreHandle_) {
             return;
         }
@@ -230,14 +237,18 @@ static void smartcard_check_status (SCARDCONTEXT hContext,
     LONG result;
 
     if (hCardHandle == 0) {
+        #ifdef UNICODE
+        result = SCardConnect(hContext, convertStringToWString(pReader).c_str(), shareMode, preferredProtocols, &hCardHandle, &dwAP);
+        #elif
         result = SCardConnect(hContext, pReader, shareMode, preferredProtocols, &hCardHandle, &dwAP);
+        #endif
         DEBUG_SCARD_STATUS("SCardConnect", result);
         if (SCARD_S_SUCCESS != result) {
             hCardHandle = 0;
         }
     }
 
-    char szReader[200];
+    TCHAR szReader[200];
     DWORD cch = sizeof(szReader);
     BYTE bAttr[32];
     DWORD cByte = 32;

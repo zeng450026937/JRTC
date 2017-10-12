@@ -42,7 +42,9 @@
 #ifdef HAVE_TIME_H
 #include <time.h>
 #endif
+#ifndef _MSC_VER
 #include <sys/time.h>
+#endif
 #include "util/timehist.h"
 #include "util/log.h"
 

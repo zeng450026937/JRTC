@@ -13,34 +13,23 @@
 #ifndef _UTIL_H
 #define _UTIL_H
 
-#include <inttypes.h>
-#include <sys/types.h>
-//#include <unistd.h>
+//@include_inttypes_h@
 #include <ldns/common.h>
 #include <time.h>
 #include <stdio.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #define dprintf(X,Y) fprintf(stderr, (X), (Y))
 /* #define	dprintf(X, Y)  */
 
-#define LDNS_VERSION "1.6.16"
-#define LDNS_REVISION ((1<<16)|(6<<8)|(16))
+#define LDNS_VERSION "@PACKAGE_VERSION@"
 
 /**
  * splint static inline workaround
  */
 #ifdef S_SPLINT_S
-#  define INLINE 
+#define INLINE 
 #else
-#  ifdef SWIG
-#    define INLINE static
-#  else
-#    define INLINE static inline
-#  endif
+#define INLINE static inline
 #endif
 
 /**
@@ -49,8 +38,6 @@ extern "C" {
 #define LDNS_MALLOC(type)		LDNS_XMALLOC(type, 1)
 
 #define LDNS_XMALLOC(type, count)	((type *) malloc((count) * sizeof(type)))
-
-#define LDNS_CALLOC(type, count)	((type *) calloc((count), sizeof(type)))
 
 #define LDNS_REALLOC(ptr, type)		LDNS_XREALLOC((ptr), type, 1)
 
@@ -268,26 +255,8 @@ const char * ldns_version(void);
  * \param[in] tm a struct tm* with the date
  * \return the seconds since epoch
  */
-time_t ldns_mktime_from_utc(const struct tm *tm);
-
 time_t mktime_from_utc(const struct tm *tm);
 
-/**
- * The function interprets time as the number of seconds since epoch
- * with respect to now using serial arithmitics (rfc1982).
- * That number of seconds is then converted to broken-out time information.
- * This is especially usefull when converting the inception and expiration
- * fields of RRSIG records.
- *
- * \param[in] time number of seconds since epoch (midnight, January 1st, 1970)
- *            to be intepreted as a serial arithmitics number relative to now.
- * \param[in] now number of seconds since epoch (midnight, January 1st, 1970)
- *            to which the time value is compared to determine the final value.
- * \param[out] result the struct with the broken-out time information
- * \return result on success or NULL on error
- */
-struct tm * ldns_serial_arithmitics_gmtime_r(int32_t time, time_t now, struct tm *result);
- 
 /**
  * Seed the random function.
  * If the file descriptor is specified, the random generator is seeded with
@@ -309,12 +278,6 @@ struct tm * ldns_serial_arithmitics_gmtime_r(int32_t time, time_t now, struct tm
  */
 int ldns_init_random(FILE *fd, unsigned int size);
 
-/**
- * Get random number.
- * \return random number.
- *
- */
-uint16_t ldns_get_random(void);
 
 /**
  * Encode data as BubbleBabble
@@ -338,7 +301,7 @@ int b32_ntop_extended_hex(uint8_t const *src, size_t srclength,
  * calculates the size needed to store the result of b32_ntop
  */
 /*@unused@*/
-INLINE size_t ldns_b32_ntop_calculate_size(size_t srcsize)
+static inline size_t ldns_b32_ntop_calculate_size(size_t srcsize)
 {
 	size_t result = ((((srcsize / 5) * 8) - 2) + 2);
 	return result;
@@ -353,17 +316,11 @@ int b32_pton_extended_hex(char const *src, size_t hashed_owner_str_len, uint8_t 
  * calculates the size needed to store the result of b32_pton
  */
 /*@unused@*/
-INLINE size_t ldns_b32_pton_calculate_size(size_t srcsize)
+static inline size_t ldns_b32_pton_calculate_size(size_t srcsize)
 {
 	size_t result = ((((srcsize) / 8) * 5));
 	return result;
 }
 #endif /* !B32_PTON */
-
-INLINE time_t ldns_time(time_t *t) { return time(t); }
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* !_UTIL_H */

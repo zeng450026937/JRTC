@@ -11,7 +11,12 @@ Product {
         name: "OpenSSL"
     }
     cpp.includePaths: [".","src/ldns"]
-    cpp.defines: []
+    cpp.defines: [
+        "HAVE_ISBLANK",
+        "HAVE_STRUCT_ADDRINFO",
+        "HAVE_CONFIG_H",
+        "_CRT_SECURE_NO_DEPRECATE"
+    ]
 
     Properties {
         condition: qbs.targetOS.contains("android")
@@ -64,16 +69,12 @@ Product {
     Export {
         Depends { name: "cpp" }
         cpp.defines: ["HAVE_" + product.name.toUpperCase()]
-        cpp.includePaths: [qbs.installRoot + "/" + product.name]
+        cpp.includePaths: product.cpp.includePaths
+        //cpp.includePaths: [qbs.installRoot + "/" + product.name]
     }
 
     Group {
         qbs.install: true
         fileTagsFilter: product.type
-    }
-    Group {
-        qbs.install: true
-        qbs.installDir: product.name
-        fileTagsFilter: "hpp"
-    }
+    }   
 }
