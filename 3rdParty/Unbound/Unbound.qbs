@@ -2,7 +2,8 @@ import qbs
 
 Product {
     name: "Unbound"
-    type: "staticlibrary"
+    //type: "staticlibrary"
+    type: "dynamiclibrary"
 
     Depends {
         name: "cpp"
@@ -30,6 +31,9 @@ Product {
         name: "source files"
         prefix: "src/"
         files: [
+            "unbound/compat/ctime_r.c",
+            "unbound/compat/gmtime_r.c",
+            "unbound/compat/snprintf.c",
             "unbound/daemon/acl_list.c",
             "unbound/daemon/cachedump.c",
             "unbound/daemon/daemon.c",
@@ -101,7 +105,7 @@ Product {
 
     Export {
         Depends { name: "cpp" }
-        cpp.defines: ["HAVE_" + product.name.toUpperCase()]
+        cpp.defines: product.cpp.defines.concat(["HAVE_" + product.name.toUpperCase()])
         cpp.includePaths: [product.buildDirectory + "/" + product.name]
     }
 

@@ -4,7 +4,10 @@ import qbs.FileInfo
 
 Product {
     name: "OpenSSL"
-    type: "staticlibrary"
+    //type: "staticlibrary"
+    type: "dynamiclibrary"
+
+    property stringList libraries: ["Ws2_32", "User32", "Gdi32", "Crypt32", "Advapi32"]
 
     Depends {
         name: "cpp"
@@ -19,24 +22,36 @@ Product {
         qbs.installRoot
     ]
     cpp.defines: [
-            "OPENSSL_NO_ASM",
-            "OPENSSL_NO_GMP",
-            "OPENSSL_NO_JPAKE",
-            "OPENSSL_NO_KRB5",
-            "OPENSSL_NO_MD2",
-            "OPENSSL_NO_RFC3779",
-            "OPENSSL_NO_STORE",
-            "OPENSSL_NO_DYNAMIC_ENGINE",
-            "OPENSSL_NO_SCTP",
-            "OPENSSL_NO_EC_NISTP_64_GCC_128"
+        "OPENSSL_NO_ASM",
+        "OPENSSL_NO_GMP",
+        "OPENSSL_NO_JPAKE",
+        "OPENSSL_NO_KRB5",
+        "OPENSSL_NO_MD2",
+        "OPENSSL_NO_RFC3779",
+        "OPENSSL_NO_STORE",
+        "OPENSSL_NO_DYNAMIC_ENGINE",
+        "OPENSSL_NO_SCTP",
+        "OPENSSL_NO_EC_NISTP_64_GCC_128",
+
+        "OPENSSL_THREADS"
     ] 
     Properties {
         condition: qbs.targetOS.contains("windows")
         cpp.defines: outer.concat([
             "OPENSSL_SYSNAME_WIN32",
+            "DSO_WIN32",
             "WIN32_LEAN_AND_MEAN"
         ])
     }
+    Properties {
+        condition: product.type == "dynamiclibrary"
+        cpp.defines: outer.concat([
+            "OPENSSL_BUILD_SHLIBCRYPTO",
+            "OPENSSL_BUILD_SHLIBSSL"
+        ])
+    }
+    
+    cpp.dynamicLibraries: libraries
 
     Group {
         name: "global"
@@ -1068,10 +1083,10 @@ Product {
         cpp.defines: {
             var defines = outer.concat(["OPENSSL_THREADS"])
             if (qbs.targetOS.contains("windows")) {
-                defines.concat(["HEADER_OCSP_H"])
+                defines.concat(["HEADER_OCSP_H", "OPENSSL_EXPORT_VAR_AS_FUNCTION"])
 
                 if (qbs.toolchain.contains("mingw"))
-                    defines.concat(["DSO_WIN32","OPENSSL_EXPORT_VAR_AS_FUNCTION"])
+                    defines.concat(["DSO_WIN32"])
             }
             if (product.type == "dynamiclibrary")
                 defines.concat(["OPENSSL_BUILD_SHLIBCRYPTO"])
@@ -1153,7 +1168,7 @@ Product {
 
     Export {
         Depends { name: "cpp" }
-        cpp.defines: ["HAVE_" + product.name.toUpperCase()]
+        cpp.defines: product.cpp.defines.concat(["HAVE_" + product.name.toUpperCase()])
         cpp.includePaths: [
             qbs.installRoot,
             qbs.installRoot + "/" + product.name

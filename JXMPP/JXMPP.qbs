@@ -12,8 +12,8 @@ Project {
 
     Product {
         name: "JXMPP"
-        type: "staticlibrary"
-        //type: "dynamiclibrary"
+        //type: "staticlibrary"
+        type: "dynamiclibrary"
         version: "1.0"
 
         Depends {
@@ -23,60 +23,60 @@ Project {
             condition: project.BOOST_BUNDLED
             name: "Boost"
             cpp.link: true
-            cpp.linkWholeArchive: true
+            cpp.linkWholeArchive: false
         }
         Depends {
             condition: project.EXPAT_BUNDLED
             name: "Expat"
-            cpp.link: false
+            cpp.link: true
             cpp.linkWholeArchive: false
         }
         Depends {
             condition: project.ICU_BUNDLED
             name: "ICU"
-            cpp.link: false
+            cpp.link: true
             cpp.linkWholeArchive: false
         }
         Depends {
             condition: project.LIBIDN_BUNDLED
             name: "LibIDN"
-            cpp.link: false
+            cpp.link: true
             cpp.linkWholeArchive: false
         }
         Depends {
             condition: project.LIBMINIUPNPC_BUNDLED
             name: "LibMiniUPnPc"
-            cpp.link: false
+            cpp.link: true
             cpp.linkWholeArchive: false
         }
         Depends {
             condition: project.LIBNATPMP_BUNDLED
             name: "LibNATPMP"
-            cpp.link: false
+            cpp.link: true
             cpp.linkWholeArchive: false
         }
         Depends {
             condition: project.OPENSSL_BUNDLED
             name: "OpenSSL"
-            cpp.link: false
+            cpp.link: true
             cpp.linkWholeArchive: false
         }    
         Depends {
             condition: project.SQLITE_BUNDLED
             name: "SQLite"
-            cpp.link: false
+            cpp.link: true
             cpp.linkWholeArchive: false
         }
         Depends {
             condition: project.ZLIB_BUNDLED
             name: "ZLib"
-            cpp.link: false
+            cpp.link: true
             cpp.linkWholeArchive: false
         }
 
         cpp.defines: {
             // 0x0600 = _WIN32_WINNT_VISTA, 0x06000000 = NTDDI_VISTA
-            var def = ["JXMPP_EXPORT", "NEED_IDN", "_WIN32_WINNT=0x0600", "NTDDI_VERSION=0x06000000"]
+            var def = ["JXMPP_EXPORT", "BOOST_ALL_NO_LIB", "NEED_IDN", "_WIN32_WINNT=0x0600", "NTDDI_VERSION=0x06000000"]
 
             if (project.BOOST_BUNDLED)
                 def.push("HAVE_BOOST")
@@ -119,6 +119,7 @@ Project {
             cpp.cxxFlags: ["/EHsc", "/nologo", "/Zm256", "/bigobj"]
             cpp.linkerFlags: ["/INCREMENTAL:no", "/NOLOGO"]
             cpp.staticLibraries: outer.concat(librarys)
+            cpp.dynamicLibraries: outer.concat(librarys)
         }
         Properties {
             condition: qbs.targetOS.contains("darwin")
@@ -1010,16 +1011,9 @@ Project {
         }
 
         Export {
-            Depends {
-                name: "cpp"
-            }
-            Depends {
-                condition: project.BOOST_BUNDLED
-                name: "Boost"
-                cpp.link: true
-                cpp.linkWholeArchive: true
-            }
-            cpp.defines: product.cpp.defines.concat(["HAVE_JXMPP"])
+            Depends { name: "cpp" }
+            Depends { name: "Boost" }
+            cpp.defines: product.cpp.defines.concat(["HAVE_" + product.name.toUpperCase()])
             cpp.includePaths: product.cpp.includePaths
         }
 

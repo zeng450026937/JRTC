@@ -3,6 +3,7 @@ import qbs
 Product {
     name: "Ldns"
     type: "staticlibrary"
+    //type: "dynamiclibrary"
 
     Depends {
         name: "cpp"
@@ -35,6 +36,9 @@ Product {
             "ldns/compat/b32_pton.c",
             "ldns/compat/b64_ntop.c",
             "ldns/compat/b64_pton.c",
+            "ldns/compat/gettimeofday.c",
+            "ldns/compat/localtime_r.c",
+            "ldns/compat/strlcpy.c",
             "ldns/buffer.c",
             "ldns/dname.c",
             "ldns/dnssec_sign.c",
@@ -68,9 +72,8 @@ Product {
 
     Export {
         Depends { name: "cpp" }
-        cpp.defines: ["HAVE_" + product.name.toUpperCase()]
+        cpp.defines: product.cpp.defines.concat(["HAVE_" + product.name.toUpperCase()])
         cpp.includePaths: product.cpp.includePaths
-        //cpp.includePaths: [qbs.installRoot + "/" + product.name]
     }
 
     Group {

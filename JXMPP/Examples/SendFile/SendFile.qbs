@@ -7,7 +7,7 @@ Project {
 
         Depends { 
             name: "JXMPP"
-            cpp.link: false
+            cpp.link: true
             cpp.linkWholeArchive: false
         }
 
@@ -24,7 +24,7 @@ Project {
 
         Depends { 
             name: "JXMPP"
-            cpp.link: false
+            cpp.link: true
             cpp.linkWholeArchive: false
         }
 

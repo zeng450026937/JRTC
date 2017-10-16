@@ -3,10 +3,12 @@ import qbs
 Product {
     name: "SQLite"
     type: "staticlibrary"
+    //type: "dynamiclibrary"
 
     Depends {
         name: "cpp"
     }
+    cpp.defines: []
     cpp.includePaths: ["."]
 
     Group {
@@ -16,7 +18,7 @@ Product {
 
     Export {
         Depends { name: "cpp" }
-        cpp.defines: ["HAVE_" + product.name.toUpperCase()]
+        cpp.defines: product.cpp.defines.concat(["HAVE_" + product.name.toUpperCase()])
         cpp.includePaths: product.cpp.includePaths
     }
 

@@ -6,8 +6,8 @@ CppApplication {
 
     Depends { 
         name: "JXMPP"
-        cpp.link: true
-        cpp.linkWholeArchive: false
+        //cpp.link: false
+        //cpp.linkWholeArchive: false
     }
 
     files: [ "SendMessage.cpp" ]

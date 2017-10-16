@@ -11,6 +11,6 @@ Project {
         //"NetworkTool/NetworkTool.qbs",
         //"ParserTester/ParserTester.qbs",
         //"SendFile/SendFile.qbs",
-        "SendMessage/SendMessage.qbs"
+        //"SendMessage/SendMessage.qbs"
     ]
 }

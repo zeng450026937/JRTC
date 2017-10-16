@@ -3,12 +3,16 @@ import qbs
 Product {
     name: "ICU"
     type: "staticlibrary"
+    //type: "dynamiclibrary"
+
+    property stringList libraries: ["Advapi32"]
 
     Depends {
         name: "cpp"
     }
     cpp.defines: ["HAVE_DLOPEN=0", "U_HAVE_ATOMIC=1", "U_HAVE_MMAP=0", "U_STATIC_IMPLEMENTATION","U_USING_ICU_NAMESPACE=0"]
     cpp.includePaths: ["src/common"]
+    cpp.dynamicLibraries: libraries
 
     Group {
         name: "stubdata"
@@ -62,7 +66,7 @@ Product {
 
     Export {
         Depends { name: "cpp" }
-        cpp.defines: ["HAVE_" + product.name.toUpperCase()]
+        cpp.defines: product.cpp.defines.concat(["HAVE_" + product.name.toUpperCase()])
         cpp.includePaths: product.cpp.includePaths
     }
 

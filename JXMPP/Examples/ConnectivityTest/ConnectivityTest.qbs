@@ -4,17 +4,9 @@ CppApplication {
     name: "ConnectivityTest"
     consoleApplication: true
 
-    Depends {
-        name: "cpp"
-    }
-    Depends {
-        name: "Boost"
-        cpp.link: true
-        cpp.linkWholeArchive: false
-    }
     Depends { 
         name: "JXMPP"
-        cpp.link: false
+        cpp.link: true
         cpp.linkWholeArchive: false
     }
 

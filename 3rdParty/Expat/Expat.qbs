@@ -3,6 +3,7 @@ import qbs
 Product {
     name: "Expat"
     type: "staticlibrary"
+    //type: "dynamiclibrary"
 
     Depends {
         name: "cpp"
@@ -38,7 +39,7 @@ Product {
 
     Export {
         Depends { name: "cpp" }
-        cpp.defines: ["HAVE_" + product.name.toUpperCase()]
+        cpp.defines: product.cpp.defines.concat(["HAVE_" + product.name.toUpperCase()])
         cpp.includePaths: [
             qbs.installRoot,
             qbs.installRoot + "/" + product.name

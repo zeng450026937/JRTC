@@ -3,6 +3,9 @@ import qbs
 Product {
     name: "LibMiniUPnPc"
     type: "staticlibrary"
+    //type: "dynamiclibrary"
+
+    property stringList libraries: ["Ws2_32", "Iphlpapi"]
 
     Depends {
         name: "cpp"
@@ -16,6 +19,8 @@ Product {
         "NDEBUG",
         "MINIUPNP_STATICLIB"
     ]
+
+    cpp.dynamicLibraries: libraries
 
     Properties {
         condition: qbs.targetOS.contains("darwin")
@@ -55,7 +60,7 @@ Product {
 
     Export {
         Depends { name: "cpp" }
-        cpp.defines: ["HAVE_" + product.name.toUpperCase()]
+        cpp.defines: product.cpp.defines.concat(["HAVE_" + product.name.toUpperCase()])
         cpp.includePaths: product.cpp.includePaths
     }
 

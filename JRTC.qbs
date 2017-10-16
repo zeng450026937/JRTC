@@ -25,7 +25,7 @@ Project {
     
     references: [
         "3rdParty/3rdParty.qbs",
-        "JXMPP/JXMPP.qbs"
+        //"JXMPP/JXMPP.qbs"
     ]
     qbsSearchPaths: "Qbs"
 }

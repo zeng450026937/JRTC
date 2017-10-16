@@ -323,4 +323,6 @@ static inline size_t ldns_b32_pton_calculate_size(size_t srcsize)
 }
 #endif /* !B32_PTON */
 
+INLINE time_t ldns_time(time_t *t) { return time(t); }
+
 #endif /* !_UTIL_H */
